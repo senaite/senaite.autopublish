@@ -1,0 +1,34 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  i18n_domain="senaite.autopublish">
+
+  <!--
+  Samples listing with additional button "Auto-publish"
+  -->
+  <subscriber
+    for="bika.lims.browser.analysisrequest.AnalysisRequestsView
+         *"
+    provides="senaite.core.listing.interfaces.IListingViewAdapter"
+    factory=".analysisrequests.AnalysisRequestsListingViewAdapter" />
+
+  <!--
+  Adapter that intercepts the action auto-publish when the the Auto-publish
+  custom transition button is pressed in Samples listing and redirects to the
+  auto-publish samples confirmation view
+  -->
+  <adapter
+    name="workflow_action_auto_publish"
+    for="*
+         zope.publisher.interfaces.browser.IBrowserRequest"
+    factory=".analysisrequests.WorkflowActionAutoPublishAdapter"
+    provides="bika.lims.interfaces.IWorkflowActionAdapter"
+    permission="zope.Public" />
+
+  <!-- Adapter in charge to auto-publish the queued samples -->
+  <adapter
+    name="senaite.autopublish.task_autopublish"
+    factory=".queue.QueuedAutopublishTaskAdapter"
+    provides="senaite.queue.interfaces.IQueuedTaskAdapter"
+    for="bika.lims.interfaces.IAnalysisRequest" />
+
+</configure>

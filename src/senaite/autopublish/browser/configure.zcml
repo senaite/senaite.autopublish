@@ -1,0 +1,26 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="senaite.autopublish">
+
+  <!-- Page login by username. Note that only users with Publish permission for
+  the given context (Sample) can access -->
+  <browser:page
+    name="login_as"
+    for="bika.lims.interfaces.IAnalysisRequest"
+    class=".loginas.LoginAs"
+    permission="senaite.core.permissions.TransitionPublishResults"
+    layer="senaite.autopublish.interfaces.ISenaiteAutopublishLayer" />
+
+  <!-- Auto-publish confirmation view
+   View displaying the list of Samples to be auto-published plus configuration
+   settings such as the type of report to use
+   -->
+  <browser:page
+    name="auto_publish_confirm"
+    for="*"
+    class=".confirmation.AutopublishConfirmationView"
+    permission="zope.Public"
+    layer="senaite.autopublish.interfaces.ISenaiteAutopublishLayer" />
+
+</configure>

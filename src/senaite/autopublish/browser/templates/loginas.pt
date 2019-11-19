@@ -1,0 +1,13 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      i18n:domain="senaite.autopublish">
+  <head></head>
+  <body>
+  <form id="loginas" name="loginas" method="POST">
+    <input type="text" id="username" name="username"></input>
+    <input type="text" id="taskuid" name="taskuid"></input>
+    <input type="hidden" name="submitted" value="1"/>
+    <input type="submit" name="submit" value="submit" />
+    <input tal:replace="structure context/@@authenticator/authenticator"/>
+  </form>
+  </body>
+</html>

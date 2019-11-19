@@ -1,0 +1,124 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="senaite.autopublish">
+  <head>
+    <metal:block fill-slot="javascript_head_slot"
+                 tal:define="portal context/@@plone_portal_state/portal;">
+    </metal:block>
+    <metal:block fill-slot="style_slot"
+                 tal:define="portal context/@@plone_portal_state/portal;">
+      <style>
+        h2 {
+          font-size:1.4em;
+          font-weight:normal;
+        }
+        h3 {
+          font-size:1.2em;
+          font-weight:normal;
+        }
+        td {
+          font-size:0.9em;
+        }
+        .monospace {
+          font-family: monospace;
+          white-space:nowrap;
+        }
+      </style>
+    </metal:block>
+  </head>
+  <body>
+
+    <!-- Title -->
+    <metal:title fill-slot="content-title">
+      <h1 i18n:translate="">
+        Automatic publication of samples
+      </h1>
+    </metal:title>
+
+    <!-- Description -->
+    <metal:description fill-slot="content-description">
+      <div id="portal-alert">
+        <div class="portal-alert-item alert alert-warning">
+          <p>
+            <strong i18n:translate="">Warning</strong>
+          </p>
+          <p i18n:translate="">
+            Multi-results reports are not supported with auto-publish.
+          </p>
+          <p i18n:translate="">
+            Therefore, Samples will not be aggregated in a single report,
+            but automatically published one-by-one.
+          </p>
+        </div>
+      </div>
+    </metal:description>
+
+    <!-- Content -->
+    <metal:core fill-slot="content-core">
+      <div id="autopublish-confirm-view"
+           class="row"
+           tal:define="portal context/@@plone_portal_state/portal;">
+
+        <div class="col-sm-12">
+          <form class="form"
+                id="autopublish_confirm_form"
+                name="autopublish_confirm_form"
+                method="POST">
+
+            <!-- Hidden Fields -->
+            <input type="hidden" name="submitted" value="1"/>
+            <input tal:replace="structure context/@@authenticator/authenticator"/>
+
+            <!-- Table of samples to auto-publish -->
+            <h2>Samples to process</h2>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Sample ID</th>
+                  <th>Sample Type</th>
+                  <th>Client</th>
+                  <th>Contact</th>
+                  <th>Analyses</th>
+                  <th>Received</th>
+                  <th>Verified</th>
+                  <th>Verified by</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr tal:repeat="sample view/get_samples_data">
+                  <input type="hidden" name="selected_uids:list" tal:attributes="value sample/uid"/>
+                  <td tal:content="sample/id" class="monospace"></td>
+                  <td tal:content="sample/sampletype/title"></td>
+                  <td tal:content="sample/client/title"></td>
+                  <td tal:content="sample/contact_fullname"></td>
+                  <td tal:content="sample/analyses"></td>
+                  <td tal:content="python:view.ulocalized_time(sample['date_received'])"></td>
+                  <td tal:content="python:view.ulocalized_time(sample['date_verified'])"></td>
+                  <td tal:content="sample/verified_by"></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Form Controls -->
+            <div>
+              <!-- Cancel -->
+              <input class="btn btn-default btn-sm"
+                     type="submit"
+                     name="button_cancel"
+                     i18n:attributes="value"
+                     value="Cancel"/>
+              <!-- Confirm -->
+              <input class="btn btn-success btn-sm"
+                     type="submit"
+                     name="button_confirm"
+                     i18n:attributes="value"
+                     value="Confirm"/>
+            </div>
+          </form>
+        </div>
+      </div>
+    </metal:core>
+  </body>
+</html>

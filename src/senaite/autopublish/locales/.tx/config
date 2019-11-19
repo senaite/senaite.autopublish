@@ -1,0 +1,9 @@
+[main]
+host = https://www.transifex.com
+
+[senaite-autopublish]
+file_filter = <lang>/LC_MESSAGES/senaite.autopublish.po
+host = https://www.transifex.com
+source_file = senaite.autopublish.pot
+source_lang = en
+type = PO

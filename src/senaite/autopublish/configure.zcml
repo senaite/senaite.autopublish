@@ -1,0 +1,61 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="senaite.autopublish">
+
+  <five:registerPackage package="." initialize=".initialize"/>
+
+  <!-- Register Translations -->
+  <i18n:registerTranslations directory="locales" />
+
+  <!-- Needed for "senaite.core: Transition: Publish Results" permission -->
+  <include package="bika.lims" file="permissions.zcml" />
+
+  <!-- Static resource directory -->
+  <browser:resourceDirectory
+    name="senaite.autopublish.static"
+    directory="static"
+    layer="senaite.autopublish.interfaces.ISenaiteAutopublishLayer"/>
+
+  <!-- Package includes -->
+  <include package=".adapters"/>
+  <include package=".browser"/>
+
+  <!-- Installation profile -->
+  <genericsetup:registerProfile
+      name="default"
+      title="SENAITE AUTOPUBLISH"
+      directory="profiles/default"
+      description="Automatic publication of results for SENAITE"
+      pre_handler="senaite.autopublish.setuphandlers.pre_install"
+      post_handler="senaite.autopublish.setuphandlers.post_install"
+      provides="Products.GenericSetup.interfaces.EXTENSION" />
+
+  <!-- Generic Setup *IMPORT STEP* -->
+  <genericsetup:importStep
+      name="SENAITE AUTOPUBLISH"
+      title="Automatic publication of results for SENAITE"
+      description="Run SENAITE.AUTOPUBLISH Handler"
+      handler="senaite.autopublish.setuphandlers.setup_handler" />
+
+  <!-- Generic Setup *UNINSTALL* Profile -->
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="SENAITE AUTOPUBLISH"
+      directory="profiles/uninstall"
+      description="Automatic publication of results for SENAITE"
+      post_handler="senaite.autopublish.setuphandlers.post_uninstall"
+      provides="Products.GenericSetup.interfaces.EXTENSION" />
+
+  <!-- Autopublish Control panel -->
+  <browser:page
+    name="autopublish-controlpanel"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".controlpanel.AutopublishControlPanelView"
+    permission="senaite.core.permissions.ManageBika"
+    layer="senaite.autopublish.interfaces.ISenaiteAutopublishLayer" />
+
+</configure>
