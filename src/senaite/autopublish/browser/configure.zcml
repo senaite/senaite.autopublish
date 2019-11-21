@@ -23,4 +23,14 @@
     permission="zope.Public"
     layer="senaite.autopublish.interfaces.ISenaiteAutopublishLayer" />
 
+  <!-- Sample viewlet for when the sample is in queue -->
+  <browser:viewlet
+    for="bika.lims.interfaces.IAnalysisRequest"
+    name="senaite.autopublish.queued_sample_viewlet"
+    class=".viewlets.QueuedSampleViewlet"
+    manager="plone.app.layout.viewlets.interfaces.IAboveContent"
+    template="templates/queued_sample_viewlet.pt"
+    permission="zope2.View"
+    layer="senaite.autopublish.interfaces.ISenaiteAutopublishLayer" />
+
 </configure>
