@@ -48,7 +48,7 @@ def pre_install(portal_setup):
     for dependency in ["senaite.lims", "senaite.queue"]:
         # Only install the dependency once!
         qi = portal.portal_quickinstaller
-        if not qi.isProductInstalled("senaite.lims"):
+        if not qi.isProductInstalled(dependency):
             profile_id = "profile-{}:default".format(dependency)
             portal_setup.runAllImportStepsFromProfile(profile_id)
 
