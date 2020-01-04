@@ -41,11 +41,15 @@ after running bin/buildout with the egg `senaite.autopublish`.
 Selenium WebDriver supports several browser drivers, but only
 `chromedriver <https://sites.google.com/a/chromium.org/chromedriver/getting-started>`_
 is supported by `senaite.autopublish`. After running bin/buildout, you still
-need to install the chrome browser and the chrome browser driver. Although
-`senaite.autopublish` runs the browser in headless mode, you need to have
-a graphical interface in place in your system. Since your SENAITE instance is
-probably running in a server without graphical interface, we suggest to install
-`xvfb <https://linux.die.net/man/1/xvfb>`_ , a virtual framebuffer X server.
+need to install the chrome browser and the chrome browser driver. Refer to
+`versions selection documentation <https://sites.google.com/a/chromium.org/chromedriver/downloads/version-selection>`_
+for further details.
+
+Although `senaite.autopublish` runs the browser in headless mode, you need to
+have a graphical interface in place in your system. Since your SENAITE instance
+is probably running in a server without graphical interface, we suggest to
+install `xvfb <https://linux.die.net/man/1/xvfb>`_ , a virtual framebuffer X
+server.
 
 Remember that `senaite.autopublish` depends on `senaite.queue` and the latter
 has to be properly configured too. Please, check the usage and configuration
