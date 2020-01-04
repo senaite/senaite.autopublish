@@ -26,9 +26,7 @@ from selenium.common.exceptions import WebDriverException
 from senaite.autopublish import api
 from senaite.autopublish import logger
 from senaite.queue.adapters import QueuedTaskAdapter
-from senaite.queue.interfaces import IQueuedTaskAdapter
 from zope.component import adapts
-from zope.interface import implements
 
 from bika.lims import workflow as wf
 from bika.lims.interfaces import IAnalysisRequest
@@ -41,7 +39,6 @@ class QueuedAutopublishTaskAdapter(QueuedTaskAdapter):
     """Adapter in charge to auto-publish the queued samples
     """
     adapts(IAnalysisRequest)
-    implements(IQueuedTaskAdapter)
 
     @property
     def timeout(self):
