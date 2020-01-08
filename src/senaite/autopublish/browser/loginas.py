@@ -41,8 +41,6 @@ class LoginAs(BrowserView):
         # Sample and it's status is "verified"
         if not IAnalysisRequest.providedBy(self.context):
             return "Not a sample"
-        if not IQueued.providedBy(self.context):
-            return "Not in queue"
         if api.get_review_status(self.context) != "verified":
             return "Not in verified status"
 

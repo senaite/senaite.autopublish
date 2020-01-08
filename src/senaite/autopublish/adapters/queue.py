@@ -26,7 +26,9 @@ from selenium.common.exceptions import WebDriverException
 from senaite.autopublish import api
 from senaite.autopublish import logger
 from senaite.queue.adapters import QueuedTaskAdapter
+from senaite.queue.interfaces import IQueued
 from zope.component import adapts
+from zope.interface import noLongerProvides
 
 from bika.lims import workflow as wf
 from bika.lims.interfaces import IAnalysisRequest
@@ -67,8 +69,8 @@ class QueuedAutopublishTaskAdapter(QueuedTaskAdapter):
         # Auto-publish task
         success = self.auto_publish(self.context, self.report_only, self.timeout)
         if success:
-            # Update the sample object (we've done the publish in a new thread)
-            task.context._p_jar.sync()
+            # Sync the sample object (we've done the publish in a new thread)
+            self.context._p_jar.sync()
 
         return success
 
@@ -124,6 +126,10 @@ class QueuedAutopublishTaskAdapter(QueuedTaskAdapter):
         # Send the Email
         logger.info("Sending report {} ...".format(repr(sample)))
         browser.find_element_by_name("send").click()
+
+        # Wait until the send process finishes
+        xpath = "//span[@class='documentFirstHeading']"
+        self.wait_for_xpath(browser, xpath)
         return True
 
     def generate_preview(self, browser, sample, timeout):
@@ -247,7 +253,6 @@ class QueuedAutopublishTaskAdapter(QueuedTaskAdapter):
 
     def members(self):
         """ lists all members on this Plone site """
-
         membership = api.get_tool('portal_membership')
         members = membership.listMembers()
         results = []
