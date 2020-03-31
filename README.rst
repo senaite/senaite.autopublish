@@ -53,7 +53,7 @@ server.
 
 Remember that `senaite.autopublish` depends on `senaite.queue` and the latter
 has to be properly configured too. Please, check the usage and configuration
-instructions provided in `senaite.queue repository <https://github.com/senaite/senaite.queue`_.
+instructions provided in `senaite.queue repository <https://github.com/senaite/senaite.queue>`_.
 
 Screenshots
 ===========
