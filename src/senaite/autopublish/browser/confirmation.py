@@ -18,15 +18,16 @@
 # Copyright 2019 by it's authors.
 # Some rights reserved, see README and LICENSE.
 
-from collections import OrderedDict
+import six
 
+from collections import OrderedDict
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from senaite.autopublish import api
 from senaite.autopublish import messageFactory as _
 from senaite.autopublish.adapters.queue import AUTOPUBLISH_TASK_ID
-from senaite.queue.interfaces import IQueued
-from senaite.queue.queue import queue_task
+from senaite.queue.api import is_queued
+from senaite.queue.api import queue_task
 
+from bika.lims import api
 from bika.lims.browser import BrowserView
 from bika.lims.catalog import CATALOG_ANALYSIS_REQUEST_LISTING
 
@@ -83,7 +84,7 @@ class AutopublishConfirmationView(BrowserView):
         """Queue a sample (by uid) to the auto-publish task
         """
         sample = api.get_object_by_uid(uid)
-        queue_task(AUTOPUBLISH_TASK_ID, self.request, sample)
+        queue_task(AUTOPUBLISH_TASK_ID, self.request, sample, unique=True)
         return sample
 
     def get_uids(self):
@@ -91,9 +92,9 @@ class AutopublishConfirmationView(BrowserView):
         """
         uids = self.request.form.get("uids", "")
         if not uids:
-            # check for the `items` parammeter
+            # check for the `items` parameter
             uids = self.request.form.get("items", "")
-        if isinstance(uids, basestring):
+        if isinstance(uids, six.string_types):
             uids = uids.split(",")
         unique_uids = OrderedDict().fromkeys(uids).keys()
         return unique_uids
@@ -105,14 +106,9 @@ class AutopublishConfirmationView(BrowserView):
         query = dict(portal_type="AnalysisRequest", UID=uids,
                      review_state="verified")
         objects = api.search(query, CATALOG_ANALYSIS_REQUEST_LISTING)
-        # Boil-out samples that are IQueued
-        samples = []
-        for obj in objects:
-            obj = api.get_object(obj)
-            if IQueued.providedBy(obj):
-                continue
-            samples.append(obj)
-        return samples
+        # Boil-out queued samples
+        samples = filter(is_queued, objects)
+        return map(api.get_object, objects)
 
     def get_samples_data(self):
         """Returns a list of Samples data

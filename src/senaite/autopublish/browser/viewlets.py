@@ -1,15 +1,33 @@
+# -*- coding: utf-8 -*-
+#
+# This file is part of SENAITE.AUTOPUBLISH.
+#
+# SENAITE.AUTOPUBLISH is free software: you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by the Free
+# Software Foundation, version 2.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+# details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program; if not, write to the Free Software Foundation, Inc., 51
+# Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+# Copyright 2019 by it's authors.
+# Some rights reserved, see README and LICENSE.
+
+from plone.app.layout.viewlets import ViewletBase
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from senaite.autopublish.adapters.queue import AUTOPUBLISH_TASK_ID
-from senaite.queue.interfaces import IQueued
-from senaite.queue.storage import QueueStorageTool
-from senaite.autopublish import api
-from plone.app.layout.viewlets import ViewletBase
+from senaite.queue.api import is_queued
 
 
 class QueuedSampleViewlet(ViewletBase):
     """Viewlet that displays a message stating the current Sample is queued
     """
-    template = ViewPageTemplateFile("templates/queued_sample_viewlet.pt")
+    index = ViewPageTemplateFile("templates/queued_sample_viewlet.pt")
 
     def __init__(self, context, request, view, manager=None):
         super(QueuedSampleViewlet, self).__init__(
@@ -18,17 +36,5 @@ class QueuedSampleViewlet(ViewletBase):
         self.request = request
         self.view = QueuedSampleViewlet
 
-    def is_queued_for_autopublish(self):
-        """Returns whether the current context is queued for autopublish
-        """
-        if IQueued.providedBy(self.context):
-            qtool = QueueStorageTool()
-            uid = api.get_uid(self.context)
-            if qtool.get_task(uid, task_name=AUTOPUBLISH_TASK_ID):
-                return True
-        return False
-
-    def render(self):
-        if self.is_queued_for_autopublish():
-            return self.template()
-        return ""
+    def is_visible(self):
+        return is_queued(self.context, task_name=AUTOPUBLISH_TASK_ID)

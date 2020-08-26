@@ -20,8 +20,7 @@
 
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from senaite.queue.interfaces import IQueued
-from senaite.queue.storage import QueueStorageTool
+from senaite.queue.api import get_queue
 
 from bika.lims import api
 from bika.lims.interfaces import IAnalysisRequest
@@ -59,7 +58,7 @@ class LoginAs(BrowserView):
                 return "No task UID provided"
 
             # Check if a task for the given task uid exists
-            qtool = QueueStorageTool()
+            qtool = get_queue()
             task = qtool.get_task(task_uid)
             if not task:
                 return "No task found for {}".format(task_uid)
@@ -72,7 +71,7 @@ class LoginAs(BrowserView):
                 return "No valid user {} for task {}".format(username, task_uid)
 
             # Check if the current context is the same as the task's
-            if task.context != self.context:
+            if task.context_uid != api.get_uid(self.context):
                 return "No valid context for task {}".format(task_uid)
 
             # Get the user

@@ -1,5 +1,7 @@
 <div tal:omit-tag=""
-     i18n:domain="senaite.queue">
+     i18n:domain="senaite.autopublish"
+     tal:condition="python:view.is_visible()">
+
   <div class="visualClear"></div>
   <div id="portal-alert">
     <div class="portlet-alert-item alert alert-warning alert-dismissible">

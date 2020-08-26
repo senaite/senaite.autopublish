@@ -20,16 +20,17 @@
 
 import time
 
+import six
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import WebDriverException
-from senaite.autopublish import api
 from senaite.autopublish import logger
-from senaite.queue.adapters import QueuedTaskAdapter
-from senaite.queue.interfaces import IQueued
+from senaite.queue import api as queue_api
+from senaite.queue.interfaces import IQueuedTaskAdapter
 from zope.component import adapts
-from zope.interface import noLongerProvides
+from zope.interface import implements
 
+from bika.lims import api
 from bika.lims import workflow as wf
 from bika.lims.interfaces import IAnalysisRequest
 
@@ -37,10 +38,15 @@ from bika.lims.interfaces import IAnalysisRequest
 AUTOPUBLISH_TASK_ID = "senaite.autopublish.task_autopublish"
 
 
-class QueuedAutopublishTaskAdapter(QueuedTaskAdapter):
+class QueuedAutopublishTaskAdapter(object):
     """Adapter in charge to auto-publish the queued samples
     """
+    implements(IQueuedTaskAdapter)
     adapts(IAnalysisRequest)
+
+    def __init__(self, context):
+        self.context = context
+        self.task = None
 
     @property
     def timeout(self):
@@ -57,12 +63,17 @@ class QueuedAutopublishTaskAdapter(QueuedTaskAdapter):
         report_only = self.request.get("report_only", "0")
         return report_only == "1"
 
-    def process(self, task, request):
+    @property
+    def request(self):
+        """Return the current request
+        """
+        return api.get_request()
+
+    def process(self, task):
         """Processes the task of auto-publishing a queued sample
         """
-        self.request = request
         self.task = task
-        if self.context != task.context:
+        if api.get_uid(self.context) != task.context_uid:
             logger.error("Task's context does not match with self.context")
             return False
 
@@ -143,7 +154,7 @@ class QueuedAutopublishTaskAdapter(QueuedTaskAdapter):
     def get_publish_url(self, uids):
         """Returns the senaite's publish url
         """
-        if isinstance(uids, basestring):
+        if isinstance(uids, six.string_types):
             uids = [uids]
         return "{}/analysisrequests/publish?items={}".format(
             self.portal_url, ",".join(uids))
@@ -232,7 +243,7 @@ class QueuedAutopublishTaskAdapter(QueuedTaskAdapter):
         ac = self.request.get("__ac", "")
         # To add the cookie we need to visit the site first. Just visit an
         # static resource to make the thing faster
-        dummy_url = api.get_queue_image_url("queued.gif")
+        dummy_url = queue_api.get_queue_image_url("queued.gif")
         self.get(browser, dummy_url)
         browser.add_cookie({"name": "__ac", "value": ac})
 
