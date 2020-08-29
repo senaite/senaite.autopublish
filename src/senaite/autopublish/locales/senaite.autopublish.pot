@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-08-29 21:19+0000\n"
+"POT-Creation-Date: 2020-08-29 21:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,10 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: senaite.autopublish\n"
+
+#: senaite.autopublish/src/senaite/autopublish/browser/templates/auto_publish_confirm.pt:83
+msgid "Analyses"
+msgstr ""
 
 #: senaite.autopublish/src/senaite/autopublish/adapters/analysisrequests.py:49
 msgid "Auto-publish"
@@ -45,8 +49,16 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
+#: senaite.autopublish/src/senaite/autopublish/browser/templates/auto_publish_confirm.pt:81
+msgid "Client"
+msgstr ""
+
 #: senaite.autopublish/src/senaite/autopublish/browser/templates/auto_publish_confirm.pt:113
 msgid "Confirm"
+msgstr ""
+
+#: senaite.autopublish/src/senaite/autopublish/browser/templates/auto_publish_confirm.pt:82
+msgid "Contact"
 msgstr ""
 
 #: senaite.autopublish/src/senaite/autopublish/browser/templates/auto_publish_confirm.pt:47
@@ -65,6 +77,10 @@ msgstr ""
 msgid "Number of samples to auto-publish per task"
 msgstr ""
 
+#: senaite.autopublish/src/senaite/autopublish/browser/templates/auto_publish_confirm.pt:84
+msgid "Received"
+msgstr ""
+
 #: senaite.autopublish/src/senaite/autopublish/configure.zcml:35
 msgid "SENAITE AUTOPUBLISH"
 msgstr ""
@@ -73,12 +89,36 @@ msgstr ""
 msgid "SENAITE AUTOPUBLISH Settings"
 msgstr ""
 
+#: senaite.autopublish/src/senaite/autopublish/browser/templates/auto_publish_confirm.pt:79
+msgid "Sample ID"
+msgstr ""
+
+#: senaite.autopublish/src/senaite/autopublish/browser/templates/auto_publish_confirm.pt:80
+msgid "Sample Type"
+msgstr ""
+
+#: senaite.autopublish/src/senaite/autopublish/browser/templates/queued_sample_viewlet.pt:11
+msgid "Sample queued for auto-publish"
+msgstr ""
+
+#: senaite.autopublish/src/senaite/autopublish/browser/templates/auto_publish_confirm.pt:75
+msgid "Samples to process"
+msgstr ""
+
 #: senaite.autopublish/src/senaite/autopublish/browser/templates/auto_publish_confirm.pt:50
 msgid "Therefore, Samples will not be aggregated in a single report, but automatically published one-by-one."
 msgstr ""
 
 #: senaite.autopublish/src/senaite/autopublish/browser/templates/queued_sample_viewlet.pt:12
 msgid "This sample is being processed in background (auto-publish)"
+msgstr ""
+
+#: senaite.autopublish/src/senaite/autopublish/browser/templates/auto_publish_confirm.pt:85
+msgid "Verified"
+msgstr ""
+
+#: senaite.autopublish/src/senaite/autopublish/browser/templates/auto_publish_confirm.pt:86
+msgid "Verified by"
 msgstr ""
 
 #: senaite.autopublish/src/senaite/autopublish/browser/templates/auto_publish_confirm.pt:45

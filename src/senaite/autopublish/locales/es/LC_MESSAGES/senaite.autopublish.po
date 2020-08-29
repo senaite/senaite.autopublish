@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-08-29 21:19+0000\n"
+"POT-Creation-Date: 2020-08-29 21:52+0000\n"
 "PO-Revision-Date: 2020-08-29 21:10+0000\n"
 "Last-Translator: Jordi Puiggené <jpuiggene@naralabs.com>, 2020\n"
 "Language-Team: Spanish (https://www.transifex.com/senaite/teams/112889/es/)\n"
@@ -20,6 +20,10 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: senaite.autopublish\n"
 "Language: es\n"
+
+#: senaite/autopublish/browser/templates/auto_publish_confirm.pt:83
+msgid "Analyses"
+msgstr "Análisis"
 
 #: senaite/autopublish/adapters/analysisrequests.py:49
 msgid "Auto-publish"
@@ -49,9 +53,17 @@ msgstr "Configuración de publicación automática"
 msgid "Cancel"
 msgstr "Cancelar"
 
+#: senaite/autopublish/browser/templates/auto_publish_confirm.pt:81
+msgid "Client"
+msgstr "Cliente"
+
 #: senaite/autopublish/browser/templates/auto_publish_confirm.pt:113
 msgid "Confirm"
 msgstr "Confirmar"
+
+#: senaite/autopublish/browser/templates/auto_publish_confirm.pt:82
+msgid "Contact"
+msgstr "Contacto"
 
 #: senaite/autopublish/browser/templates/auto_publish_confirm.pt:47
 msgid "Multi-results reports are not supported with auto-publish."
@@ -69,6 +81,10 @@ msgstr "Número de muestras que seran auto-publicadas en una sola tarea. Un valo
 msgid "Number of samples to auto-publish per task"
 msgstr "Número de muestras a publicar por tarea"
 
+#: senaite/autopublish/browser/templates/auto_publish_confirm.pt:84
+msgid "Received"
+msgstr "Fecha recepción"
+
 #: senaite/autopublish/configure.zcml:35
 msgid "SENAITE AUTOPUBLISH"
 msgstr "SENAITE AUTOPUBLISH"
@@ -77,6 +93,22 @@ msgstr "SENAITE AUTOPUBLISH"
 msgid "SENAITE AUTOPUBLISH Settings"
 msgstr "Configuración de SENAITE AUTOPUBLISH"
 
+#: senaite/autopublish/browser/templates/auto_publish_confirm.pt:79
+msgid "Sample ID"
+msgstr "ID Muestra"
+
+#: senaite/autopublish/browser/templates/auto_publish_confirm.pt:80
+msgid "Sample Type"
+msgstr "Tipo de muestra"
+
+#: senaite/autopublish/browser/templates/queued_sample_viewlet.pt:11
+msgid "Sample queued for auto-publish"
+msgstr "Muestra añadida a la cola de publicación automática"
+
+#: senaite/autopublish/browser/templates/auto_publish_confirm.pt:75
+msgid "Samples to process"
+msgstr "Muestras a procesar"
+
 #: senaite/autopublish/browser/templates/auto_publish_confirm.pt:50
 msgid "Therefore, Samples will not be aggregated in a single report, but automatically published one-by-one."
 msgstr "Así, las muestras no se agregarán en un único informe de resultados, sinó que serán publicadas individualmente"
@@ -84,6 +116,14 @@ msgstr "Así, las muestras no se agregarán en un único informe de resultados, 
 #: senaite/autopublish/browser/templates/queued_sample_viewlet.pt:12
 msgid "This sample is being processed in background (auto-publish)"
 msgstr "Esta muestra se está procesando internamente (publicación automática)"
+
+#: senaite/autopublish/browser/templates/auto_publish_confirm.pt:85
+msgid "Verified"
+msgstr "Fecha verificación"
+
+#: senaite/autopublish/browser/templates/auto_publish_confirm.pt:86
+msgid "Verified by"
+msgstr "Verificada por"
 
 #: senaite/autopublish/browser/templates/auto_publish_confirm.pt:45
 msgid "Warning"

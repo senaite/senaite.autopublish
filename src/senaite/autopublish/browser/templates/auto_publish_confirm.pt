@@ -72,31 +72,31 @@
             <input tal:replace="structure context/@@authenticator/authenticator"/>
 
             <!-- Table of samples to auto-publish -->
-            <h2>Samples to process</h2>
+            <h2 i18n:translate="">Samples to process</h2>
             <table class="table table-bordered">
               <thead>
                 <tr>
-                  <th>Sample ID</th>
-                  <th>Sample Type</th>
-                  <th>Client</th>
-                  <th>Contact</th>
-                  <th>Analyses</th>
-                  <th>Received</th>
-                  <th>Verified</th>
-                  <th>Verified by</th>
+                  <th i18n:translate="">Sample ID</th>
+                  <th i18n:translate="">Sample Type</th>
+                  <th i18n:translate="">Client</th>
+                  <th i18n:translate="">Contact</th>
+                  <th i18n:translate="">Analyses</th>
+                  <th i18n:translate="">Received</th>
+                  <th i18n:translate="">Verified</th>
+                  <th i18n:translate="">Verified by</th>
                 </tr>
               </thead>
               <tbody>
                 <tr tal:repeat="sample view/get_samples_data">
                   <input type="hidden" name="selected_uids:list" tal:attributes="value sample/uid"/>
-                  <td tal:content="sample/id" class="monospace"></td>
-                  <td tal:content="sample/sampletype/title"></td>
-                  <td tal:content="sample/client/title"></td>
-                  <td tal:content="sample/contact_fullname"></td>
-                  <td tal:content="sample/analyses"></td>
-                  <td tal:content="python:view.ulocalized_time(sample['date_received'])"></td>
-                  <td tal:content="python:view.ulocalized_time(sample['date_verified'])"></td>
-                  <td tal:content="sample/verified_by"></td>
+                  <td tal:content="sample/id" class="monospace"/>
+                  <td tal:content="sample/sampletype/title"/>
+                  <td tal:content="sample/client/title"/>
+                  <td tal:content="sample/contact_fullname"/>
+                  <td tal:content="sample/analyses"/>
+                  <td tal:content="python:view.ulocalized_time(sample['date_received'])"/>
+                  <td tal:content="python:view.ulocalized_time(sample['date_verified'])"/>
+                  <td tal:content="sample/verified_by"/>
                 </tr>
               </tbody>
             </table>
