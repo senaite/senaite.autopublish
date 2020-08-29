@@ -6,8 +6,20 @@ have `SENAITE LIMS`_ and senaite.autopublish already installed, with a reserved
 zeo client listening at port 8089 and a regular zeo client listening at port 8080.
 Please read the :doc:`installation` for further details.
 
-Auto-publish multiple samples
------------------------------
+Control panel
+-------------
+
+Visit the control panel view for senaite.autopublish to configure the settings.
+This control panel is accessible to users with `Site Administrator` role,
+through "Site Setup" view, "Add-on Configuration" section:
+
+http://localhost:8080/senaite/@@autopublish-controlpanel
+
+.. note:: It assumes you have a SENAITE zeo client listening to port 8080
+
+
+Auto-publish samples
+--------------------
 
 Login as a SENAITE regular user with enough privileges to publish samples. Be
 sure you have some samples in "verified" status. Go to Samples listing, and
@@ -16,7 +28,7 @@ samples and a button "Auto publish" will be displayed at the bottom of the list.
 
 Press the "Auto publish" button at the bottom and a confirmation view is displayed:
 
-.. image:: static/queue_monitor.png
+.. image:: static/confirmation_view.png
   :width: 1024
   :alt: Confirmation view
 

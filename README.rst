@@ -1,11 +1,14 @@
-*Automatic publication of results for SENAITE LIMS*
-===================================================
+Automatic publication of results for SENAITE LIMS
+=================================================
 
 .. image:: https://img.shields.io/pypi/v/senaite.autopublish.svg?style=flat-square
     :target: https://pypi.python.org/pypi/senaite.autopublish
 
 .. image:: https://img.shields.io/travis/senaite/senaite.autopublish/master.svg?style=flat-square
     :target: https://travis-ci.org/senaite/senaite.autopublish
+
+.. image:: https://readthedocs.org/projects/pip/badge/
+    :target: https://senaiteautopublish.readthedocs.org
 
 .. image:: https://img.shields.io/github/issues-pr/senaite/senaite.autopublish.svg?style=flat-square
     :target: https://github.com/senaite/senaite.autopublish/pulls
@@ -18,57 +21,19 @@
 
 
 About
-=====
+-----
 
-This package enables the automatic and asynchronous publishing of results
-reports, emailing included. User can choose multiple Samples in verified status
-from samples listing and press the button "Auto publish" at the bottom of the
-list. A confirmation is displayed and once the "Confirm" button is pressed, the
-system delegates the publication process of the selected samples to
-`senaite.queue`. This allows the sequential publication of large amounts of
-samples in background, with just one click and with minimum impact on site
-performance.
+This add-on enables the automatic and asynchronous publishing of results reports
+for `SENAITE LIMS`_, especially indicated for the unattended publication of
+large amounts of samples with minimum impact on site performance.
 
-Installation
-============
+Documentation
+-------------
 
-`senaite.autopublish` makes use of `Selenium WebDriver <https://selenium.dev/>`_,
-a well-known tool used for browser testing automation: therefore, the
-`selenium python package <https://pypi.org/project/selenium/>`_ , that provides
-python language bindings for Selenium WebDriver, is automatically installed
-after running bin/buildout with the egg `senaite.autopublish`.
-
-Selenium WebDriver supports several browser drivers, but only
-`chromedriver <https://sites.google.com/a/chromium.org/chromedriver/getting-started>`_
-is supported by `senaite.autopublish`. After running bin/buildout, you still
-need to install the chrome browser and the chrome browser driver. Refer to
-`versions selection documentation <https://sites.google.com/a/chromium.org/chromedriver/downloads/version-selection>`_
-for further details.
-
-Although `senaite.autopublish` runs the browser in headless mode, you need to
-have a graphical interface in place in your system. Since your SENAITE instance
-is probably running in a server without graphical interface, we suggest to
-install `xvfb <https://linux.die.net/man/1/xvfb>`_ , a virtual framebuffer X
-server.
-
-Remember that `senaite.autopublish` depends on `senaite.queue` and the latter
-has to be properly configured too. Please, check the usage and configuration
-instructions provided in `senaite.queue repository <https://github.com/senaite/senaite.queue>`_.
-
-Screenshots
-===========
-
-Confirmation view
------------------
-
-.. image:: https://raw.githubusercontent.com/senaite/senaite.autopublish/master/static/confirmation_view.png
-   :alt: Confirmation view
-   :width: 760px
-   :align: center
-
+* https://senaiteautopublish.readthedocs.io
 
 Contribute
-==========
+----------
 
 We want contributing to SENAITE.AUTOPUBLISH to be fun, enjoyable, and educational
 for anyone, and everyone. This project adheres to the `Contributor Covenant
@@ -89,7 +54,7 @@ If you wish to contribute with translations, check the project site on
 
 
 Feedback and support
-====================
+--------------------
 
 * `Community site <https://community.senaite.org/>`_
 * `Gitter channel <https://gitter.im/senaite/Lobby>`_
@@ -97,9 +62,9 @@ Feedback and support
 
 
 License
-=======
+-------
 
-**SENAITE.AUTOPUBLISH** Copyright (C) 2019 Senaite Foundation
+**SENAITE.AUTOPUBLISH** Copyright (C) 2019-2020 RIDING BYTES & NARALABS
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the `GNU General Public License version 2
