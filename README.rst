@@ -64,9 +64,8 @@ License
 **SENAITE.AUTOPUBLISH** Copyright (C) 2019-2020 RIDING BYTES & NARALABS
 
 This program is free software; you can redistribute it and/or modify it under
-the terms of the `GNU General Public License version 2
-<https://github.com/senaite/senaite.autopublish/blob/master/LICENSE>`_ as published
-by the Free Software Foundation.
+the terms of the `GNU General Public License version 2`_ as published by the
+Free Software Foundation.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -76,9 +75,10 @@ GNU General Public License for more details.
 .. Links
 
 .. _SENAITE LIMS: https://www.senaite.com
-.. _Contributor Covenant: https://github.com/senaite/senaite.autopublish/blob/master/CODE_OF_CONDUCT.md
-.. _Contributing to senaite.autopublish document: https://github.com/senaite/senaite.autopublish/blob/master/CONTRIBUTING.md
+.. _Contributor Covenant: https://github.com/senaite/senaite.autopublish/blob/1.x/CODE_OF_CONDUCT.md
+.. _Contributing to senaite.autopublish document: https://github.com/senaite/senaite.autopublish/blob/1.x/CONTRIBUTING.md
 .. _Transifex: https://www.transifex.com/senaite/senaite-autopublish/
 .. _Community site: https://community.senaite.org/
 .. _Gitter channel: https://gitter.im/senaite/Lobby
 .. _Users list: https://sourceforge.net/projects/senaite/lists/senaite-users
+.. _GNU General Public License version 2: https://github.com/senaite/senaite.autopublish/blob/1.x/LICENSE
