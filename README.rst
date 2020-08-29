@@ -36,8 +36,7 @@ Contribute
 ----------
 
 We want contributing to SENAITE.AUTOPUBLISH to be fun, enjoyable, and educational
-for anyone, and everyone. This project adheres to the `Contributor Covenant
-<https://github.com/senaite/senaite.autopublish/blob/master/CODE_OF_CONDUCT.md>`_.
+for anyone, and everyone. This project adheres to the `Contributor Covenant`_.
 
 By participating, you are expected to uphold this code. Please report
 unacceptable behavior.
@@ -46,19 +45,17 @@ Contributions go far beyond pull requests and commits. Although we love giving
 you the opportunity to put your stamp on SENAITE.AUTOPUBLISH, we also are thrilled
 to receive a variety of other contributions.
 
-Please, read `Contributing to senaite.autopublish document
-<https://github.com/senaite/senaite.autopublish/blob/master/CONTRIBUTING.md>`_.
+Please, read `Contributing to senaite.autopublish document`_.
 
-If you wish to contribute with translations, check the project site on
-`Transifex <https://www.transifex.com/senaite/senaite-autopublish/>`_.
+If you wish to contribute with translations, check the project site on `Transifex`_.
 
 
 Feedback and support
 --------------------
 
-* `Community site <https://community.senaite.org/>`_
-* `Gitter channel <https://gitter.im/senaite/Lobby>`_
-* `Users list <https://sourceforge.net/projects/senaite/lists/senaite-users>`_
+* `Community site`_
+* `Gitter channel`_
+* `Users list`_
 
 
 License
@@ -75,3 +72,13 @@ This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
+
+.. Links
+
+.. _SENAITE LIMS: https://www.senaite.com
+.. _Contributor Covenant: https://github.com/senaite/senaite.autopublish/blob/master/CODE_OF_CONDUCT.md
+.. _Contributing to senaite.autopublish document: https://github.com/senaite/senaite.autopublish/blob/master/CONTRIBUTING.md
+.. _Transifex: https://www.transifex.com/senaite/senaite-autopublish/
+.. _Community site: https://community.senaite.org/
+.. _Gitter channel: https://gitter.im/senaite/Lobby
+.. _Users list: https://sourceforge.net/projects/senaite/lists/senaite-users
