@@ -1,0 +1,94 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Translators:
+# Jordi Puiggené <jpuiggene@naralabs.com>, 2020
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2020-08-29 21:19+0000\n"
+"PO-Revision-Date: 2020-08-29 21:10+0000\n"
+"Last-Translator: Jordi Puiggené <jpuiggene@naralabs.com>, 2020\n"
+"Language-Team: Spanish (https://www.transifex.com/senaite/teams/112889/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: senaite.autopublish\n"
+"Language: es\n"
+
+#: senaite/autopublish/adapters/analysisrequests.py:49
+msgid "Auto-publish"
+msgstr "Publicación automática"
+
+#: senaite/autopublish/profiles/default/controlpanel.xml
+msgid "Auto-publish Settings"
+msgstr "Configuración de publicación automática"
+
+#: senaite/autopublish/browser/confirmation.py:64
+msgid "Auto-publish of samples cancelled"
+msgstr "La publicación automática de muestras ha sido cancelada"
+
+#: senaite/autopublish/configure.zcml:35
+msgid "Automatic publication of results for SENAITE"
+msgstr "Publicación automática de resultados para SENAITE"
+
+#: senaite/autopublish/browser/templates/auto_publish_confirm.pt:35
+msgid "Automatic publication of samples"
+msgstr "Publicación automática de muestras"
+
+#: senaite/autopublish/profiles/default/actionicons.xml
+msgid "Autopublish Settings"
+msgstr "Configuración de publicación automática"
+
+#: senaite/autopublish/browser/templates/auto_publish_confirm.pt:107
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: senaite/autopublish/browser/templates/auto_publish_confirm.pt:113
+msgid "Confirm"
+msgstr "Confirmar"
+
+#: senaite/autopublish/browser/templates/auto_publish_confirm.pt:47
+msgid "Multi-results reports are not supported with auto-publish."
+msgstr "Informes multi-resultados no están soportados por la publicación automática"
+
+#: senaite/autopublish/browser/confirmation.py:59
+msgid "No samples selected"
+msgstr "No ha seleccionado ninguna muestra"
+
+#: senaite/autopublish/controlpanel.py:35
+msgid "Number of samples that will be handled in a single queued task when auto-publishing. A value of 0 disables the auto-publish functionality. Default: 1, maximum allowed: 5"
+msgstr "Número de muestras que seran auto-publicadas en una sola tarea. Un valor de 0 desactiva la funcionalidad de publicación automática. Valor por defecto: 1, Valor máximo: 5"
+
+#: senaite/autopublish/controlpanel.py:34
+msgid "Number of samples to auto-publish per task"
+msgstr "Número de muestras a publicar por tarea"
+
+#: senaite/autopublish/configure.zcml:35
+msgid "SENAITE AUTOPUBLISH"
+msgstr "SENAITE AUTOPUBLISH"
+
+#: senaite/autopublish/controlpanel.py:47
+msgid "SENAITE AUTOPUBLISH Settings"
+msgstr "Configuración de SENAITE AUTOPUBLISH"
+
+#: senaite/autopublish/browser/templates/auto_publish_confirm.pt:50
+msgid "Therefore, Samples will not be aggregated in a single report, but automatically published one-by-one."
+msgstr "Así, las muestras no se agregarán en un único informe de resultados, sinó que serán publicadas individualmente"
+
+#: senaite/autopublish/browser/templates/queued_sample_viewlet.pt:12
+msgid "This sample is being processed in background (auto-publish)"
+msgstr "Esta muestra se está procesando internamente (publicación automática)"
+
+#: senaite/autopublish/browser/templates/auto_publish_confirm.pt:45
+msgid "Warning"
+msgstr "Atención"
+
+#: senaite/autopublish/browser/confirmation.py:77
+msgid "{} samples enqueued for auto-publish: {}"
+msgstr "Se han añadido {} muestras a la cola para la publicación automática: {}"

@@ -1,0 +1,87 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2020-08-29 21:19+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+#: senaite/autopublish/adapters/analysisrequests.py:49
+msgid "Auto-publish"
+msgstr ""
+
+#: senaite/autopublish/profiles/default/controlpanel.xml
+msgid "Auto-publish Settings"
+msgstr ""
+
+#: senaite/autopublish/browser/confirmation.py:64
+msgid "Auto-publish of samples cancelled"
+msgstr ""
+
+#: senaite/autopublish/configure.zcml:35
+msgid "Automatic publication of results for SENAITE"
+msgstr ""
+
+#: senaite/autopublish/browser/templates/auto_publish_confirm.pt:35
+msgid "Automatic publication of samples"
+msgstr ""
+
+#: senaite/autopublish/profiles/default/actionicons.xml
+msgid "Autopublish Settings"
+msgstr ""
+
+#: senaite/autopublish/browser/templates/auto_publish_confirm.pt:107
+msgid "Cancel"
+msgstr ""
+
+#: senaite/autopublish/browser/templates/auto_publish_confirm.pt:113
+msgid "Confirm"
+msgstr ""
+
+#: senaite/autopublish/browser/templates/auto_publish_confirm.pt:47
+msgid "Multi-results reports are not supported with auto-publish."
+msgstr ""
+
+#: senaite/autopublish/browser/confirmation.py:59
+msgid "No samples selected"
+msgstr ""
+
+#: senaite/autopublish/controlpanel.py:35
+msgid "Number of samples that will be handled in a single queued task when auto-publishing. A value of 0 disables the auto-publish functionality. Default: 1, maximum allowed: 5"
+msgstr ""
+
+#: senaite/autopublish/controlpanel.py:34
+msgid "Number of samples to auto-publish per task"
+msgstr ""
+
+#: senaite/autopublish/configure.zcml:35
+msgid "SENAITE AUTOPUBLISH"
+msgstr ""
+
+#: senaite/autopublish/controlpanel.py:47
+msgid "SENAITE AUTOPUBLISH Settings"
+msgstr ""
+
+#: senaite/autopublish/browser/templates/auto_publish_confirm.pt:50
+msgid "Therefore, Samples will not be aggregated in a single report, but automatically published one-by-one."
+msgstr ""
+
+#: senaite/autopublish/browser/templates/queued_sample_viewlet.pt:12
+msgid "This sample is being processed in background (auto-publish)"
+msgstr ""
+
+#: senaite/autopublish/browser/templates/auto_publish_confirm.pt:45
+msgid "Warning"
+msgstr ""
+
+#: senaite/autopublish/browser/confirmation.py:77
+msgid "{} samples enqueued for auto-publish: {}"
+msgstr ""
