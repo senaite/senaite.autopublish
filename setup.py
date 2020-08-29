@@ -29,9 +29,7 @@ setup(
     install_requires=[
         "selenium",
         "setuptools",
-        "senaite.lims>=1.3.0",
-        "senaite.lims<2.0.0",
-        "senaite.queue",
+        "senaite.queue>=1.0.2",
     ],
     extras_require={
         "test": [
