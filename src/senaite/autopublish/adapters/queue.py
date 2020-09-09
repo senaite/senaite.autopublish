@@ -95,13 +95,19 @@ class QueuedAutopublishTaskAdapter(object):
                 self.generate_report_and_email(browser, sample, timeout)
         except (WebDriverException, TimeoutException, RuntimeError,
                 Exception) as e:
-            if browser:
-                # Close the browser gracefully
-                try:
-                    browser.quit()
-                except:
-                    pass
+            self.close_session(browser)
             raise e
+
+        self.close_session(browser)
+
+    def close_session(self, browser):
+        """Closes the browser windows and terminates chromedriver
+        """
+        if browser:
+            try:
+                browser.quit()
+            except:
+                pass
 
     def generate_report_only(self, browser, sample, timeout):
         """Generates and stores the results report for the sample passed in
