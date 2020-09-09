@@ -96,7 +96,7 @@ class QueuedAutopublishTaskAdapter(object):
         except (WebDriverException, TimeoutException, RuntimeError,
                 Exception) as e:
             self.close_session(browser)
-            raise e
+            raise RuntimeError(e.message)
 
         self.close_session(browser)
 
@@ -169,10 +169,17 @@ class QueuedAutopublishTaskAdapter(object):
     def get_headless_browser_session(self):
         """Returns a headless browser session in senaite
         """
-        options = webdriver.ChromeOptions()
-        options.add_argument('headless')
-        browser = webdriver.Chrome(chrome_options=options)
-        self.authenticate(browser)
+        browser = None
+        try:
+            options = webdriver.ChromeOptions()
+            options.add_argument('headless')
+            browser = webdriver.Chrome(chrome_options=options)
+            self.authenticate(browser)
+        except (WebDriverException, TimeoutException, RuntimeError,
+                Exception) as e:
+            self.close_session(browser)
+            raise e
+
         return browser
 
     def get(self, browser, url, timeout=600, xpath=None, xpath_timeout=300):
