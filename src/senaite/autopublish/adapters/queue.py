@@ -23,7 +23,6 @@ import time
 import six
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
-from selenium.common.exceptions import WebDriverException
 from senaite.autopublish import logger
 from senaite.queue import api as queue_api
 from senaite.queue.interfaces import IQueuedTaskAdapter
@@ -53,7 +52,7 @@ class QueuedAutopublishTaskAdapter(object):
         """Returns the maximum number of seconds to wait for an url or xpath
         to load before being considered unreachable
         """
-        return 300
+        return 10
 
     @property
     def report_only(self):
@@ -93,10 +92,9 @@ class QueuedAutopublishTaskAdapter(object):
                 wf.doActionFor(sample, "publish")
             else:
                 self.generate_report_and_email(browser, sample, timeout)
-        except (WebDriverException, TimeoutException, RuntimeError,
-                Exception) as e:
+        except Exception as e:
             self.close_session(browser)
-            raise RuntimeError(e.message)
+            raise e
 
         self.close_session(browser)
 
@@ -172,11 +170,15 @@ class QueuedAutopublishTaskAdapter(object):
         browser = None
         try:
             options = webdriver.ChromeOptions()
-            options.add_argument('headless')
+            options.add_argument('--headless')
+            options.add_argument('--no-sandbox')
+            options.add_argument('--disable-gpu')
+            options.add_argument('disable-infobars')
+            options.add_argument("--disable-extensions")
+            options.add_argument('--ignore-certificate-errors')
             browser = webdriver.Chrome(chrome_options=options)
             self.authenticate(browser)
-        except (WebDriverException, TimeoutException, RuntimeError,
-                Exception) as e:
+        except Exception as e:
             self.close_session(browser)
             raise e
 
