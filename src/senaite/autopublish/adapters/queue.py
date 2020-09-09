@@ -98,7 +98,7 @@ class QueuedAutopublishTaskAdapter(object):
             if browser:
                 # Close the browser gracefully
                 try:
-                    browser.close()
+                    browser.quit()
                 except:
                     pass
             raise e
