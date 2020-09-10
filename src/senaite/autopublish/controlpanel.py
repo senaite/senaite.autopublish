@@ -29,14 +29,12 @@ from zope.interface import Interface
 class IAutopublishControlPanel(Interface):
     """Control panel Settings
     """
-
-    task_action_autopublish = schema.Int(
-        title=_(u"Number of samples to auto-publish per task"),
+    timeout = schema.Int(
+        title=_(u"Timeout"),
         description=_(
-            "Number of samples that will be handled in a single queued task "
-            "when auto-publishing. A value of 0 disables the auto-publish "
-            "functionality. Default: 1, maximum allowed: 5"),
-        default=1,
+            "Maximum number of seconds to wait for an url or xpath to load "
+            "before being considered unreachable. Default: 10"),
+        default=10,
         required=True,
     )
 

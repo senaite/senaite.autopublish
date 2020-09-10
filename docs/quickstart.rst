@@ -17,6 +17,12 @@ http://localhost:8080/senaite/@@autopublish-controlpanel
 
 .. note:: It assumes you have a SENAITE zeo client listening to port 8080
 
+From this control panel view you can define the "Timeout", that is the maximum
+number of seconds the system will wait for a URL to complete while generating
+the results report. A default value of works for most instances, but consider
+to increase this value when there are too many failures in the queue monitor
+view or `TimeoutException` appears too often in the zeo client's log.
+
 
 Auto-publish samples
 --------------------

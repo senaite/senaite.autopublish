@@ -46,13 +46,19 @@ class QueuedAutopublishTaskAdapter(object):
     def __init__(self, context):
         self.context = context
         self.task = None
+        self._timeout = None
 
     @property
     def timeout(self):
         """Returns the maximum number of seconds to wait for an url or xpath
         to load before being considered unreachable
         """
-        return 15
+        if self._timeout is None:
+            # Get the time out from the settings
+            registry_id = "senaite.autopublish.timeout"
+            timeout = api.get_registry_record(registry_id, None)
+            self._timeout = api.to_int(timeout, default=10)
+        return self._timeout
 
     @property
     def report_only(self):
@@ -76,9 +82,9 @@ class QueuedAutopublishTaskAdapter(object):
             raise ValueError("Task's context does not match with self.context")
 
         # Auto-publish task
-        self.auto_publish(self.context, self.report_only, self.timeout)
+        self.auto_publish(self.context, self.report_only)
 
-    def auto_publish(self, sample, report_only, timeout):
+    def auto_publish(self, sample, report_only):
         """Does the auto-publish of the sample
         """
         logger.info("Auto-publishing sample {} ...".format(repr(sample)))
@@ -88,10 +94,10 @@ class QueuedAutopublishTaskAdapter(object):
         try:
             browser = self.get_headless_browser_session()
             if report_only:
-                self.generate_report_only(browser, sample, timeout)
+                self.generate_report_only(browser, sample)
                 wf.doActionFor(sample, "publish")
             else:
-                self.generate_report_and_email(browser, sample, timeout)
+                self.generate_report_and_email(browser, sample)
         except Exception as e:
             self.close_session(browser)
             raise e
@@ -107,21 +113,21 @@ class QueuedAutopublishTaskAdapter(object):
             except:
                 pass
 
-    def generate_report_only(self, browser, sample, timeout):
+    def generate_report_only(self, browser, sample):
         """Generates and stores the results report for the sample passed in
         """
         # Generate preview
-        self.generate_preview(browser, sample, timeout)
+        self.generate_preview(browser, sample)
 
         # Save the report
         logger.info("Saving the report for {} ...".format(repr(sample)))
         browser.find_element_by_name("save").click()
 
-    def generate_report_and_email(self, browser, sample, timeout):
+    def generate_report_and_email(self, browser, sample):
         """Generates and emails the results report for the sample passed in
         """
         # Generate preview
-        self.generate_preview(browser, sample, timeout)
+        self.generate_preview(browser, sample)
 
         # Generate email view
         logger.info("Generating email view for {} ...".format(repr(sample)))
@@ -129,7 +135,7 @@ class QueuedAutopublishTaskAdapter(object):
 
         # Wait until the view gets rendered
         xpath = "//form[@id='send_email_form']/input[@name='send']"
-        self.wait_for_xpath(browser, xpath, timeout=timeout)
+        self.wait_for_xpath(browser, xpath)
 
         # Send the Email
         logger.info("Sending report {} ...".format(repr(sample)))
@@ -139,13 +145,13 @@ class QueuedAutopublishTaskAdapter(object):
         #xpath = "//span[@class='documentFirstHeading']"
         #self.wait_for_xpath(browser, xpath)
 
-    def generate_preview(self, browser, sample, timeout):
+    def generate_preview(self, browser, sample):
         """Generates the results report preview for the sample passed in
         """
         logger.info("Generating preview for {} ...".format(repr(sample)))
         xpath = "//div[@id='preview']/div[@class='report']/img"
         publish_url = self.get_publish_url(api.get_uid(sample))
-        self.get(browser, publish_url, xpath=xpath, timeout=timeout)
+        self.get(browser, publish_url, xpath=xpath)
 
     def get_publish_url(self, uids):
         """Returns the senaite's publish url
@@ -184,7 +190,7 @@ class QueuedAutopublishTaskAdapter(object):
 
         return browser
 
-    def get(self, browser, url, timeout=15, xpath=None, xpath_timeout=15):
+    def get(self, browser, url, xpath=None):
         """Returns True when the url provided has been loaded succesfully in
         the browser instance passed in.
         :param browser: the webdriver's browser instance
@@ -195,26 +201,24 @@ class QueuedAutopublishTaskAdapter(object):
         """
         # Load the URL provided
         logger.info("URL: {}".format(url))
-        browser.set_page_load_timeout(timeout)
+        browser.set_page_load_timeout(self.timeout)
         browser.get(url)
         logger.info("Loaded: {}".format(url))
         if xpath:
             # We need to wait for xpath to be rendered
-            self.wait_for_xpath(browser, xpath, timeout=xpath_timeout)
+            self.wait_for_xpath(browser, xpath)
 
         return True
 
-    def wait_for_xpath(self, browser, xpath, timeout=15):
+    def wait_for_xpath(self, browser, xpath):
         """Waits for an xpath to be rendered in the current browser page
         """
         start = time.time()
         while not self.has_xpath_element(browser, xpath):
             end = time.time()
-            if end - start > timeout:
+            if end - start > self.timeout:
                 msg = "Timeout for xpath='{}' [SKIP]".format(xpath)
                 raise TimeoutException(msg)
-            elif (end - start) % 5 == 0:
-                logger.info("Sleep 5s ...")
             # Look for the xpath in 1sec.
             time.sleep(1)
 

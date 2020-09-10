@@ -107,8 +107,8 @@ class AutopublishConfirmationView(BrowserView):
                      review_state="verified")
         objects = api.search(query, CATALOG_ANALYSIS_REQUEST_LISTING)
         # Boil-out queued samples
-        samples = filter(is_queued, objects)
-        return map(api.get_object, objects)
+        samples = filter(lambda o: not is_queued(o), objects)
+        return map(api.get_object, samples)
 
     def get_samples_data(self):
         """Returns a list of Samples data
