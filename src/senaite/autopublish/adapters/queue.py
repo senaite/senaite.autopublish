@@ -52,7 +52,7 @@ class QueuedAutopublishTaskAdapter(object):
         """Returns the maximum number of seconds to wait for an url or xpath
         to load before being considered unreachable
         """
-        return 10
+        return 15
 
     @property
     def report_only(self):
@@ -136,8 +136,8 @@ class QueuedAutopublishTaskAdapter(object):
         browser.find_element_by_name("send").click()
 
         # Wait until the send process finishes
-        xpath = "//span[@class='documentFirstHeading']"
-        self.wait_for_xpath(browser, xpath)
+        #xpath = "//span[@class='documentFirstHeading']"
+        #self.wait_for_xpath(browser, xpath)
 
     def generate_preview(self, browser, sample, timeout):
         """Generates the results report preview for the sample passed in
@@ -184,7 +184,7 @@ class QueuedAutopublishTaskAdapter(object):
 
         return browser
 
-    def get(self, browser, url, timeout=600, xpath=None, xpath_timeout=300):
+    def get(self, browser, url, timeout=15, xpath=None, xpath_timeout=15):
         """Returns True when the url provided has been loaded succesfully in
         the browser instance passed in.
         :param browser: the webdriver's browser instance
@@ -204,7 +204,7 @@ class QueuedAutopublishTaskAdapter(object):
 
         return True
 
-    def wait_for_xpath(self, browser, xpath, timeout=300):
+    def wait_for_xpath(self, browser, xpath, timeout=15):
         """Waits for an xpath to be rendered in the current browser page
         """
         start = time.time()
