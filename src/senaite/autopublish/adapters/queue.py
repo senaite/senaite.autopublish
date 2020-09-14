@@ -81,6 +81,11 @@ class QueuedAutopublishTaskAdapter(object):
         if api.get_uid(self.context) != task.context_uid:
             raise ValueError("Task's context does not match with self.context")
 
+        # Do not auto-publish if the sample is in published status already
+        if api.get_review_status(self.context) not in ["verified"]:
+            logger.warn("Not a verified sample: {}".format(repr(self.context)))
+            return
+
         # Auto-publish task
         self.auto_publish(self.context, self.report_only)
 
