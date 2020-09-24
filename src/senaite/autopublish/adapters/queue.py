@@ -205,6 +205,7 @@ class QueuedAutopublishTaskAdapter(object):
         :param xpath_timeout: max. number of seconds to wait for the xpath
         """
         # Load the URL provided
+        url = self.resolve_url(url)
         logger.info("URL: {}".format(url))
         browser.set_page_load_timeout(self.timeout)
         browser.get(url)
@@ -214,6 +215,17 @@ class QueuedAutopublishTaskAdapter(object):
             self.wait_for_xpath(browser, xpath)
 
         return True
+
+    def resolve_url(self, url):
+        """Resolves the url to the zeo client configured in settings
+        """
+        registry_id = "senaite.autopublish.base_url"
+        base_url = api.get_registry_record(registry_id)
+        if not base_url:
+            return url
+
+        # Replace the current base url with registry's
+        return url.replace(self.portal_url, base_url)
 
     def wait_for_xpath(self, browser, xpath):
         """Waits for an xpath to be rendered in the current browser page

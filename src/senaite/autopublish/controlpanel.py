@@ -38,6 +38,13 @@ class IAutopublishControlPanel(Interface):
         required=True,
     )
 
+    base_url = schema.TextLine(
+        title=_(u"Base URL"),
+        description=_(
+            "URL of the zeo client. If no value set, the generation of results "
+            "reports will be handled by queue's zeo client"),
+        required=False)
+
 
 class AutopublishControlPanelForm(RegistryEditForm):
     schema = IAutopublishControlPanel
