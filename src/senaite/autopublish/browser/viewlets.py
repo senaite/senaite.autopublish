@@ -20,7 +20,6 @@
 
 from plone.app.layout.viewlets import ViewletBase
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from senaite.autopublish.adapters.queue import AUTOPUBLISH_TASK_ID
 from senaite.queue.api import is_queued
 
 
@@ -37,4 +36,4 @@ class QueuedSampleViewlet(ViewletBase):
         self.view = QueuedSampleViewlet
 
     def is_visible(self):
-        return is_queued(self.context, task_name=AUTOPUBLISH_TASK_ID)
+        return is_queued(self.context)

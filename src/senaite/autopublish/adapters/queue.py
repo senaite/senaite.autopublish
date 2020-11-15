@@ -18,13 +18,11 @@
 # Copyright 2019-2020 by it's authors.
 # Some rights reserved, see README and LICENSE.
 
-import time
-
 import six
+import time
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from senaite.autopublish import logger
-from senaite.queue import api as queue_api
 from senaite.queue.interfaces import IQueuedTaskAdapter
 from zope.component import adapts
 from zope.interface import implements
@@ -252,10 +250,11 @@ class QueuedAutopublishTaskAdapter(object):
 
         # We add the cookie of the current authenticated user, cause login_as
         # form is only accessible to users with ModifyPortal privileges
-        ac = self.request.get("__ac", "")
+        ac = self.task.get("__ac", "")
         # To add the cookie we need to visit the site first. Just visit an
         # static resource to make the thing faster
-        dummy_url = queue_api.get_queue_image_url("queued.gif")
+        queue_resource = "++resource++senaite.autopublish.static/icon.png"
+        dummy_url = "{}/{}".format(self.portal_url, queue_resource)
         self.get(browser, dummy_url)
         browser.add_cookie({"name": "__ac", "value": ac})
 
