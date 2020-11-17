@@ -60,10 +60,16 @@ class QueuedAutopublishTaskAdapter(object):
 
     @property
     def report_only(self):
-        """Returns whether the generation of the results report has been
-        requested for the on-going task
+        """Returns whether only the result report (and publish transition) has
+        to be taken instead of sending the whole email
         """
         report_only = self.request.get("report_only", "0")
+        if report_only != "1":
+            # Check if the client has a valid email (is always used as fallback
+            # when no valid recipient emails are set or when empty)
+            if not self.is_client_email_valid(self.context):
+                report_only = "1"
+
         return report_only == "1"
 
     @property
@@ -86,6 +92,19 @@ class QueuedAutopublishTaskAdapter(object):
 
         # Auto-publish task
         self.auto_publish(self.context, self.report_only)
+
+    def is_client_email_valid(self, sample):
+        """Returns a well-formed recipient by using the client's email address
+        """
+        client = sample.getClient()
+        email = client.getEmailAddress()
+        if not email:
+            return False
+
+        plone_utils = api.get_tool("plone_utils")
+        if not plone_utils.validateSingleEmailAddress(email):
+            return False
+        return True
 
     def auto_publish(self, sample, report_only):
         """Does the auto-publish of the sample
