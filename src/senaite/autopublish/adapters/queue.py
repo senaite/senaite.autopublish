@@ -117,7 +117,6 @@ class QueuedAutopublishTaskAdapter(object):
             browser = self.get_headless_browser_session()
             if report_only:
                 self.generate_report_only(browser, sample)
-                wf.doActionFor(sample, "publish")
             else:
                 self.generate_report_and_email(browser, sample)
         except Exception as e:
@@ -138,12 +137,26 @@ class QueuedAutopublishTaskAdapter(object):
     def generate_report_only(self, browser, sample):
         """Generates and stores the results report for the sample passed in
         """
+        client = sample.getClient()
+
         # Generate preview
         self.generate_preview(browser, sample)
 
         # Save the report
         logger.info("Saving the report for {} ...".format(repr(sample)))
         browser.find_element_by_name("save").click()
+
+        # Wait until the save process finishes
+        xpath = "//span[@class='documentFirstHeading']"
+        self.wait_for_xpath(browser, xpath)
+
+        # Manually update to avoid conflict errors cause the report is created
+        # in another thread
+        client._p_jar.sync()  # noqa
+        sample._p_jar.sync()  # noqa
+
+        # Do manual publish
+        wf.doActionFor(sample, "publish")
 
     def generate_report_and_email(self, browser, sample):
         """Generates and emails the results report for the sample passed in
@@ -162,10 +175,6 @@ class QueuedAutopublishTaskAdapter(object):
         # Send the Email
         logger.info("Sending report {} ...".format(repr(sample)))
         browser.find_element_by_name("send").click()
-
-        # Wait until the send process finishes
-        #xpath = "//span[@class='documentFirstHeading']"
-        #self.wait_for_xpath(browser, xpath)
 
     def generate_preview(self, browser, sample):
         """Generates the results report preview for the sample passed in
